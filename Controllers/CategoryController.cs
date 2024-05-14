@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Gardens.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Gardens.Data;
+using Gardens.DataAccess;
+using GreenGardens.Models;
 
 namespace Gardens.Controllers
 {

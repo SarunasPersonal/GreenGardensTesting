@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Gardens.Models;
-namespace Gardens.Data
+using GreenGardens.Models;
+namespace Gardens.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Gardens.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Gardens.DataAccess;
 //Things added to program.cs adds to dependency injection container
 var builder = WebApplication.CreateBuilder(args);
 
