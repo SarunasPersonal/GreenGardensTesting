@@ -2,8 +2,9 @@
 using GreenGardens.Models;
 using GreenGardens.DataAccess.Repository.IRepository;
 
-namespace Gardens.Controllers
+namespace GreenGardens.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -100,18 +101,18 @@ namespace Gardens.Controllers
             Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
             if (obj == null)
             {
-                   return NotFound();
+                return NotFound();
             }
             _unitOfWork.Category.Remove(obj);
             _unitOfWork.Save();
             TempData["success"] = "Category Deleted Successfully";
             return RedirectToAction("Index");
         }
-    
+
     }
 }
 
-    
+
 
 
 
