@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GreenGardens.DataAccess\GreenGardens.DataAccess.csproj" />
     <ProjectReference Include="..\GreenGardens.Models\GreenGardens.Models.csproj" />
+    <ProjectReference Include="..\GreenGardens.Utility\GreenGardens.Utility.csproj" />
   </ItemGroup>
 
 </Project>
