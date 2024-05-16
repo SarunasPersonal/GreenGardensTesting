@@ -1,6 +1,9 @@
 ﻿using GreenGardens.DataAccess.Repository.IRepository;
 using GreenGardens.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+
 
 namespace GreenGardens.Areas.Admin.Controllers
 {
@@ -16,11 +19,22 @@ namespace GreenGardens.Areas.Admin.Controllers
             public IActionResult Index()
             {
                 List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+          
                 return View(objProductList);
             }
             public IActionResult Create()
             {
-                return View();
+                   IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                  .GetAll().Select(u => new SelectListItem
+                  {
+                      Text = u.Name,
+                      //u.Id.ToString() is the value that will be returned when the user selects this item
+                      Value = u.Id.ToString()
+                  });
+
+            ViewData["CategoryList"] = CategoryList;
+            //ViewBag.CategoryList = CategoryList;
+            return View();
             }
             [HttpPost]
             public IActionResult Create(Product obj)
