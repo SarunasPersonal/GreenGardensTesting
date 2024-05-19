@@ -3,6 +3,7 @@ using GreenGardens.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using GreenGardens.Models.ViewModels;
 
 
 namespace GreenGardens.Areas.Admin.Controllers
@@ -24,29 +25,41 @@ namespace GreenGardens.Areas.Admin.Controllers
             }
             public IActionResult Create()
             {
-                   IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
-                  .GetAll().Select(u => new SelectListItem
-                  {
-                      Text = u.Name,
-                      //u.Id.ToString() is the value that will be returned when the user selects this item
-                      Value = u.Id.ToString()
-                  });
 
-            ViewData["CategoryList"] = CategoryList;
-            //ViewBag.CategoryList = CategoryList;
-            return View();
+                ProductVM productVM = new()
+                {
+                       CategoryList = _unitOfWork.Category
+                      .GetAll().Select(u => new SelectListItem
+                      {
+                          Text = u.Name,
+                          Value = u.Id.ToString()
+                      }),
+                        Product = new Product()
+                };
+                return View(productVM);
             }
             [HttpPost]
-            public IActionResult Create(Product obj)
+            public IActionResult Create(ProductVM productVM)
             {
-                if (ModelState.IsValid)
-                {
-                    _unitOfWork.Product.Add(obj);
-                    _unitOfWork.Save();
-                    TempData["success"] = "Product created successfully";
-                    return RedirectToAction("Index");
-                }
-                return View();
+            if (ModelState.IsValid)
+                    {
+                        _unitOfWork.Product.Add(productVM.Product);
+                        _unitOfWork.Save();
+                        TempData["success"] = "Product created successfully";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+               
+                              productVM.CategoryList = _unitOfWork.Category
+                              .GetAll().Select(u => new SelectListItem
+                              {
+                                  Text = u.Name,
+                                  Value = u.Id.ToString()
+
+                              });
+                              return View(productVM);
+                    }
 
             }
         public IActionResult Edit(int? id)
