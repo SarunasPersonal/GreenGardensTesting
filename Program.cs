@@ -6,6 +6,7 @@ using GreenGardens.DataAccess;
 using GardensGardens.AccessData;
 using GreenGardens.DataAccess.Repository.IRepository;
 using GreenGardens.DataAccess.Repository;
+using Microsoft.AspNetCore.Identity;
 //Things added to program.cs adds to dependency injection container
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
