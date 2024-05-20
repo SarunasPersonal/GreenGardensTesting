@@ -5,11 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using GreenGardens.Utility;
 
 
 namespace GreenGardens.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GreenGardens.Models;
 using GreenGardens.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using GreenGardens.Utility;
 
 namespace GreenGardens.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
