@@ -100,6 +100,9 @@ namespace GreenGardens.Areas.Admin.Controllers
             }
             else
             {
+                //what I can do with getall
+                //  
+                //
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
